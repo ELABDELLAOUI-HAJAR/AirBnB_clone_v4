@@ -1,5 +1,14 @@
 $(() => {
+  const selectedAmenities = $('.amenities h4');
+  selectedAmenities.css({
+    'text-wrap': 'nowrap',
+    'text-overflow': 'ellipsis',
+    overflow: 'hidden',
+    width: '212px',
+    height: '16px'
+  });
   let checkedBoxes = [];
+
   $("input[type='checkbox']").change(function () {
     if (this.checked) {
       checkedBoxes.push({ id: this.dataset.id, name: this.dataset.name });
@@ -14,6 +23,6 @@ $(() => {
         text += `, ${amenity.name}`;
       }
     });
-    $('.amenities h4').text(text);
+    selectedAmenities.text(text);
   });
 });
