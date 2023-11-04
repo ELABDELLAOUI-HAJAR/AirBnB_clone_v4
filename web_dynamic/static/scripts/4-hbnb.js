@@ -26,7 +26,7 @@ $(() => {
     selectedAmenities.text(text);
   });
 
-  $.get('http://127.0.0.1:5001/api/v1/status/', function (data, status) {
+  $.get('http://0.0.0.0:5001/api/v1/status/', function (data, status) {
     if (status === 'success') {
       if (data.status === 'OK') {
         $('div#api_status').addClass('available');
@@ -38,7 +38,7 @@ $(() => {
 
   $.ajax({
     type: 'POST',
-    url: 'http://127.0.0.1:5001/api/v1/places_search/',
+    url: 'http://0.0.0.0:5001/api/v1/places_search/',
     data: '{}',
     success: function (data) { renderPlaces(data); },
     contentType: 'application/json'
@@ -54,7 +54,7 @@ $(() => {
 
     $.ajax({
       type: 'POST',
-      url: 'http://127.0.0.1:5001/api/v1/places_search/',
+      url: 'http://0.0.0.0:5001/api/v1/places_search/',
       data: JSON.stringify(data),
       success: function (data) { renderPlaces(data); },
       contentType: 'application/json'

@@ -41,7 +41,7 @@ $(() => {
   });
 
   /* Get API status */
-  $.get('http://127.0.0.1:5001/api/v1/status/', function (data, status) {
+  $.get('http://0.0.0.0:5001/api/v1/status/', function (data, status) {
     if (status === 'success') {
       if (data.status === 'OK') {
         $('div#api_status').addClass('available');
@@ -54,7 +54,7 @@ $(() => {
   /* Get all places */
   $.ajax({
     type: 'POST',
-    url: 'http://127.0.0.1:5001/api/v1/places_search/',
+    url: 'http://0.0.0.0:5001/api/v1/places_search/',
     data: '{}',
     success: function (data) { renderPlaces(data); },
     contentType: 'application/json'
@@ -81,7 +81,7 @@ $(() => {
 
     $.ajax({
       type: 'POST',
-      url: 'http://127.0.0.1:5001/api/v1/places_search/',
+      url: 'http://0.0.0.0:5001/api/v1/places_search/',
       data: JSON.stringify(data),
       success: function (data) { renderPlaces(data); },
       contentType: 'application/json'
@@ -95,12 +95,12 @@ function toggleReviews (placeId, elmt) {
   }
   const ul = $(elmt).parent().next();
   if ($(elmt).text() === 'show') {
-    $.get(`http://127.0.0.1:5001/api/v1/places/${placeId}/reviews`, function (data, status) {
+    $.get(`http://0.0.0.0:5001/api/v1/places/${placeId}/reviews`, function (data, status) {
       if (status === 'success') {
         data.forEach(async (review) => {
           const date = new Date(review.created_at);
           const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-          const response = await fetch(`http://127.0.0.1:5001/api/v1/users/${review.user_id}`);
+          const response = await fetch(`http://0.0.0.0:5001/api/v1/users/${review.user_id}`);
           const user = await response.json();
           ul.append(`<li>
 <h3>From ${user.first_name} ${user.last_name} The ${date.getDate()}th ${months[date.getMonth()]} ${date.getFullYear()}</h3>
